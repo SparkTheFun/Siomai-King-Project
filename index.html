@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#b42318">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <title>Siomai King Inventory</title>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="logo">SK</span><div><strong>Siomai King</strong><small>Inventory</small></div></div>
+    <button id="installBtn" class="ghost hidden">Install App</button>
+  </header>
+  <main class="shell">
+    <section id="inventory" class="view active">
+      <div class="section-head">
+        <div><h1>Inventory</h1></div>
+        <div class="actions">
+          <button id="exportBtn" class="secondary">Print / Save Report</button>
+          <button id="addProductBtn" class="primary">+ Add Product</button>
+        </div>
+      </div>
+      <div class="inventory-toolbar">
+        <label class="search-label" for="inventorySearch">Find an item</label>
+        <input id="inventorySearch" type="search" placeholder="Search by name or item ID">
+      </div>
+      <div class="card table-card">
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Product / Size</th><th>Pack contains</th><th>What remains</th><th>Price</th><th>Sold</th><th title="Direct product sales for the selected records date; combo earnings are reported separately.">Earned on selected date</th><th>Stock status</th><th>Actions</th></tr></thead>
+            <tbody id="inventoryBody"></tbody>
+          </table>
+        </div>
+      </div>
+      <p id="inventoryAlerts" class="inventory-alerts" role="status" aria-live="polite"></p>
+      <p class="note">Gulaman inventory is tracked in packs and individual leftover cups. Small and Large Gulaman packs each contain 50 cups; Solo uses 1 cup and Combo uses the configured cup count. Set the Solo price in inventory, and enter bundle prices in Combo Deals.</p>
+      <section class="card calculator" aria-labelledby="calculatorTitle">
+        <div class="calculator-head">
+          <div><p class="eyebrow">Daily stock calculation</p><h2 id="calculatorTitle">Sales Calculator</h2></div>
+          <span id="calculatorFormula" class="calculator-formula">Available stock − (servings sold × units per serving)</span>
+        </div>
+        <label class="sale-mode-label">Sale type<select id="saleMode"><option value="serving">Servings</option><option value="combo">Combo</option></select></label>
+        <div id="servingsSalePanel">
+        <div class="calculator-inputs">
+          <label>Search or choose product
+            <span class="product-picker">
+              <input id="calcProduct" type="search" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="calcProductOptions" aria-activedescendant="" placeholder="Type a product name or ID" autocomplete="off">
+              <button id="calcProductToggle" type="button" class="product-picker-toggle" aria-label="Show product choices" aria-expanded="false">▾</button>
+              <span id="calcProductOptions" class="product-picker-options" role="listbox" hidden></span>
+            </span>
+            <small class="help-text">Type a name or item ID, then choose a match.</small>
+          </label>
+          <label id="calcPacksLabel">Full packs<input id="calcPacks" type="number" min="0" step="1"><small id="calcPacksHelp" class="help-text">How many full packs you have.</small></label>
+          <label id="calcLooseLabel">Leftover pieces<input id="calcLoose" type="number" min="0" step="1"><small id="calcLooseHelp" class="help-text">Pieces left outside full packs.</small></label>
+          <label>Servings sold<input id="calcServings" type="number" min="0" step="1" value="0"><small class="help-text">One siomai serving is 4 pieces.</small></label>
+          <label>Price per serving<input id="calcSrp" type="number" min="0" step="0.01"><small class="help-text">The amount charged for one serving.</small></label>
+          <label id="calcSaleTypeLabel" class="hidden">Sale type<select id="calcSaleType"><option value="solo">Solo</option><option value="combo">Combo</option></select><small id="calcSaleTypeHelp" class="help-text">A sale deducts one cup.</small></label>
+        </div>
+        <p id="calcDetails" class="note"></p>
+        <div class="calculator-results" aria-live="polite">
+          <div class="calc-result"><small id="calcPiecesLabel">Total pieces after sales</small><strong id="calcPiecesLeft">0</strong></div>
+          <div class="calc-result"><small id="calcServingsLeftLabel">Servings you can still sell</small><strong id="calcServingsLeft">0</strong></div>
+          <div class="calc-result"><small id="calcPacksLeftLabel">Full packs remaining</small><strong id="calcPacksLeft">0</strong></div>
+          <div class="calc-result"><small id="calcLooseResultLabel">Leftover pieces remaining</small><strong id="calcLooseLeft">0</strong></div>
+          <div class="calc-result calc-total"><small>Sales for this entry</small><strong id="calcSalesTotal">₱0.00</strong></div>
+        </div>
+        <p id="calcStatus" class="note">Choose an item and enter today's counts.</p>
+        </div>
+        <section id="comboSalePanel" class="combo-calculator hidden" aria-labelledby="comboCalculatorTitle">
+          <div class="calculator-head">
+            <div><p class="eyebrow">Bundle sale</p><h2 id="comboCalculatorTitle">Combo Deals</h2></div>
+            <span class="calculator-formula">Choose a Siomai or dumpling and Gulaman size for each combo</span>
+          </div>
+          <div class="calculator-inputs">
+            <label>Filling type<select id="comboFillingType"><option value="Siomai">Siomai</option><option value="Dumplings">Dumplings</option></select></label>
+            <label id="comboFillingLabel">Siomai<select id="comboFilling"></select></label>
+            <label>Pieces per combo<input id="comboFillingQty" type="number" min="1" step="1" value="4"></label>
+            <label>Gulaman size<select id="comboGulaman"></select></label>
+            <label>Combos sold<input id="comboQuantity" type="number" min="1" step="1" value="1"></label>
+            <label>Price per combo<input id="comboPrice" type="number" min="0.01" step="0.01" placeholder="Set combo price"></label>
+          </div>
+          <p id="comboDetails" class="note" aria-live="polite"></p>
+          <p id="comboStatus" class="note">Choose the combo contents and enter its selling price.</p>
+        </section>
+        <div class="calculator-footer">
+          <button id="saleReviewBtn" type="button" class="primary" disabled>Review Sale</button>
+        </div>
+        <div class="business-totals" aria-label="Sales total minus expenses">
+          <div class="business-total"><small>Total sales for selected date</small><strong id="allSalesTotal">₱0.00</strong></div>
+          <label class="expense-input">Total expenses to subtract<input id="expensesTotal" type="number" min="0" step="0.01" value="0"><small class="help-text">Enter the combined expenses for this same sales period.</small></label>
+          <div class="business-total net-total"><small>Sales after expenses for selected date</small><strong id="netSalesTotal">₱0.00</strong></div>
+        </div>
+        <div class="calculator-tools">
+          <section class="quick-calculator" aria-labelledby="quickCalculatorTitle">
+            <div class="calculator-head">
+              <div><p class="eyebrow">Everyday math</p><h2 id="quickCalculatorTitle">Quick Calculator</h2></div>
+              <span class="calculator-formula">Add, subtract, multiply, or divide</span>
+            </div>
+            <output id="quickCalculatorDisplay" class="quick-calculator-display" aria-live="polite" aria-atomic="true">0</output>
+            <p id="quickCalculatorStatus" class="quick-calculator-status" role="status"></p>
+            <div class="quick-calculator-keys" role="group" aria-label="Calculator keys">
+              <button type="button" class="secondary" data-calculator-key="clear" aria-label="Clear">AC</button>
+              <button type="button" class="secondary" data-calculator-key="backspace" aria-label="Delete last digit">⌫</button>
+              <button type="button" class="secondary" data-calculator-key="divide" aria-label="Divide">÷</button>
+              <button type="button" class="secondary" data-calculator-key="multiply" aria-label="Multiply">×</button>
+              <button type="button" class="secondary" data-calculator-key="7">7</button>
+              <button type="button" class="secondary" data-calculator-key="8">8</button>
+              <button type="button" class="secondary" data-calculator-key="9">9</button>
+              <button type="button" class="secondary" data-calculator-key="subtract" aria-label="Subtract">−</button>
+              <button type="button" class="secondary" data-calculator-key="4">4</button>
+              <button type="button" class="secondary" data-calculator-key="5">5</button>
+              <button type="button" class="secondary" data-calculator-key="6">6</button>
+              <button type="button" class="secondary" data-calculator-key="add" aria-label="Add">+</button>
+              <button type="button" class="secondary" data-calculator-key="1">1</button>
+              <button type="button" class="secondary" data-calculator-key="2">2</button>
+              <button type="button" class="secondary" data-calculator-key="3">3</button>
+              <button type="button" class="primary" data-calculator-key="equals" aria-label="Equals">=</button>
+              <button type="button" class="secondary quick-calculator-zero" data-calculator-key="0">0</button>
+              <button type="button" class="secondary" data-calculator-key="decimal" aria-label="Decimal point">.</button>
+            </div>
+          </section>
+          <aside class="datetime-card" aria-label="Current date and time">
+            <div class="datetime-icon" aria-hidden="true">◷</div>
+            <p class="eyebrow">Today</p>
+            <time id="currentDate" class="datetime-date"></time>
+            <time id="currentTime" class="datetime-time" aria-live="off"></time>
+            <span class="datetime-live"><span></span> Live local time</span>
+          </aside>
+        </div>
+        <section class="saved-sales card" aria-labelledby="savedSalesTitle">
+          <div class="calculator-head">
+            <div><p class="eyebrow">Saved receipts</p><h2 id="savedSalesTitle">RECORDS OF THE DAY</h2></div>
+            <label class="records-date-label">Date<input id="recordsDate" type="date" aria-label="Choose records date"></label>
+            <span id="savedSalesCount" class="calculator-formula">0 receipts</span>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>Receipt / Date</th><th>Sale</th><th>Qty</th><th>Price</th><th>Total</th><th>Actions</th></tr></thead>
+              <tbody id="savedSalesBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </section>
+  </main>
+  <div id="toast" class="toast" role="status"></div>
+  <dialog id="reportDialog">
+    <form method="dialog" id="reportForm">
+      <h2>Print or Save Inventory</h2>
+      <p class="note">Choose a report date, then print or save the inventory worksheet. Reports include every receipt and expense recorded for that date; saving or printing does not clear the day's totals or inventory.</p>
+      <label>Report date<input id="reportDate" type="date" required></label>
+      <div class="dialog-actions report-actions">
+        <button value="cancel" class="secondary" formnovalidate>Cancel</button>
+        <button id="printReportBtn" type="button" class="secondary">Print</button>
+        <button id="downloadWordReportBtn" type="button" class="secondary">Download for Word</button>
+        <button id="downloadReportBtn" type="button" class="primary">Download for Excel</button>
+      </div>
+    </form>
+  </dialog>
+  <dialog id="salesReceiptDialog" aria-labelledby="salesReceiptHeading">
+    <div class="sales-receipt-content">
+      <article id="salesReceipt" class="receipt-paper">
+        <header class="receipt-header">
+          <span class="receipt-logo">SK</span>
+          <h2 id="salesReceiptHeading">Siomai King</h2>
+          <p>SALES RECEIPT</p>
+        </header>
+        <div class="receipt-meta">
+          <span>Receipt</span><strong id="receiptNumber"></strong>
+          <span>Date</span><strong id="receiptDate"></strong>
+        </div>
+        <div class="receipt-divider"></div>
+        <div id="receiptItems" class="receipt-items"></div>
+        <div class="receipt-total"><span>TOTAL</span><strong id="receiptTotal"></strong></div>
+        <div id="receiptStock" class="receipt-stock"></div>
+        <footer>Thank you for your purchase!</footer>
+      </article>
+      <div class="dialog-actions receipt-actions">
+        <button id="closeReceiptBtn" type="button" class="secondary">Close</button>
+        <button id="printReceiptBtn" type="button" class="primary">Print Receipt</button>
+      </div>
+    </div>
+  </dialog>
+  <dialog id="saleReviewDialog" aria-labelledby="saleReviewTitle">
+    <form id="saleReviewForm" method="dialog">
+      <h2 id="saleReviewTitle">Review Sale</h2>
+      <p id="saleReviewDescription" class="note"></p>
+      <div class="form-grid">
+        <label id="saleReviewQuantityLabel">Quantity<input id="saleReviewQuantity" type="number" min="1" step="1" required></label>
+        <label id="saleReviewPriceLabel">Price per sale<input id="saleReviewPrice" type="number" min="0.01" step="0.01" required></label>
+      </div>
+      <p id="saleReviewStatus" class="note" role="status"></p>
+      <div id="saleReviewComponents" class="sale-review-components"></div>
+      <div class="sale-review-total"><span>Sale total</span><strong id="saleReviewTotal">₱0.00</strong></div>
+      <div class="dialog-actions">
+        <button id="backToSaleBtn" type="button" class="secondary">Back to edit</button>
+        <button id="confirmSaleBtn" type="button" class="primary" disabled>Confirm & Save Sale</button>
+      </div>
+    </form>
+  </dialog>
+  <dialog id="productDialog">
+    <form method="dialog" id="productForm">
+      <h2 id="dialogTitle">Add Product</h2>
+      <input type="hidden" id="editId">
+      <label>Item ID<input id="productId" required></label>
+      <label>Product Name<input id="productName" required></label>
+      <label>Category<select id="productCategory" required></select><small class="help-text">The product appears under this section in the inventory table.</small></label>
+      <label>Product type<select id="productMode"><option value="regular">Regular item / serving</option><option value="cup">Gulaman cup size</option></select><small class="help-text">Choose Gulaman cup size to track packs and individual cups separately.</small></label>
+      <div class="form-grid">
+        <label>Unit<input id="productUnit" placeholder="e.g. Pack, Cup, Pcs" required><small class="help-text">For gulaman cups, the app fills in Cup automatically.</small></label>
+        <label>Cost Price per Pack<input id="productCost" type="number" min="0" step="0.01" required></label>
+        <label id="productPackSizeLabel">Pack Quantity (pieces / units)<input id="productPackSize" type="number" min="1" step="1" required><small id="productPackSizeHelp" class="help-text hidden"></small></label>
+        <label id="productSaleQtyLabel">Pieces / Units per Serving<input id="productSaleQty" type="number" min="1" step="1" required></label>
+        <label id="productPriceLabel">SRP per Serving<input id="productPrice" type="number" min="0" step="0.01" required></label>
+        <label id="productStockPacksLabel">Full packs<input id="productStockPacks" type="number" min="0" step="1" required></label>
+        <label id="productStockLooseLabel">Leftover pieces / units<input id="productStockLoose" type="number" min="0" step="1" required></label>
+        <label>Reorder Alert (full packs)<input id="productReorder" type="number" min="0" step="1" required></label>
+      </div>
+      <div id="cupOptions" class="cup-options hidden">
+        <label>Cup size<select id="productCupSize"><option value="Small">Small</option><option value="Large">Large</option></select></label>
+        <label>Cups used per combo<input id="productComboQty" type="number" min="1" step="1" value="1"></label>
+      </div>
+      <div class="dialog-actions"><button value="cancel" class="secondary" formnovalidate>Cancel</button><button value="default" class="primary">Save Product</button></div>
+    </form>
+  </dialog>
+  <dialog id="stockDialog">
+    <form method="dialog" id="stockForm">
+      <h2 id="stockDialogTitle">Update Stock</h2>
+      <input type="hidden" id="stockProductId">
+      <p id="stockProductSummary" class="note"></p>
+      <div class="form-grid">
+        <label id="stockPacksLabel">Full packs<input id="stockPacks" type="number" min="0" step="1" required></label>
+        <label id="stockLooseLabel">Leftover pieces / units<input id="stockLoose" type="number" min="0" step="1" required></label>
+      </div>
+      <div class="dialog-actions"><button value="cancel" class="secondary" formnovalidate>Cancel</button><button value="default" class="primary">Save Stock</button></div>
+    </form>
+  </dialog>
+  <script src="app.js"></script>
+</body>
+</html>

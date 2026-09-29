@@ -1,0 +1,380 @@
+:root{font-family:Inter,Segoe UI,Arial,sans-serif;color:#292524;background:#f8f5f0;--red:#b42318;--red-dark:#8f1d15;--cream:#fffdf9;--line:#e7e0d8;--muted:#78716c}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(135deg,#fffaf4,#f8f5f0);min-height:100vh}
+.topbar{height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 max(20px,calc((100% - 1180px)/2));position:sticky;top:0;z-index:2}
+.brand{display:flex;align-items:center;gap:11px}
+.logo{background:var(--red);color:#fff;font-weight:800;border-radius:12px;padding:10px 8px;font-size:15px}
+.brand strong{display:block;font-size:17px}
+.brand small{display:block;color:var(--muted);font-size:12px}
+.shell{max-width:1180px;margin:auto;padding:32px 20px 48px}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:20px}
+.eyebrow{color:var(--red);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;margin:0 0 4px}
+h1{font-size:30px;margin:0}
+h2{font-size:17px;margin:0 0 17px}
+.actions{display:flex;gap:8px}
+.calculator-tools{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(250px,.75fr);align-items:stretch;gap:18px;max-width:880px;margin:18px 0}
+.quick-calculator{min-width:0;margin:0;padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.quick-calculator .calculator-head{align-items:flex-start;flex-direction:column;gap:5px}
+.quick-calculator-display{display:block;min-height:58px;overflow-wrap:anywhere;text-align:right;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:30px;font-weight:700}
+.quick-calculator-status{min-height:18px;color:var(--red);font-size:12px;margin:5px 2px}
+.quick-calculator-keys{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.quick-calculator-keys button{min-height:48px;font-size:17px}
+.quick-calculator-keys .quick-calculator-zero{grid-column:span 2}
+.datetime-card{position:relative;display:flex;min-height:100%;flex-direction:column;justify-content:center;overflow:hidden;padding:26px;border:1px solid #8f1d15;border-radius:14px;background:linear-gradient(145deg,#b42318,#7f1d1d);color:#fff;box-shadow:0 12px 28px #8f1d1524}
+.datetime-card::after{position:absolute;right:-52px;bottom:-92px;width:220px;height:220px;border:1px solid #ffffff28;border-radius:50%;content:""}
+.datetime-card .eyebrow{color:#ffd5cb}
+.datetime-icon{display:grid;width:44px;height:44px;place-items:center;margin-bottom:26px;border:1px solid #ffffff4a;border-radius:14px;background:#ffffff18;font-size:27px}
+.datetime-date{margin-top:8px;font-size:clamp(18px,2vw,25px);font-weight:600}
+.datetime-time{margin-top:12px;font-size:clamp(38px,5vw,58px);font-variant-numeric:tabular-nums;font-weight:750;letter-spacing:-.05em;line-height:1}
+.datetime-live{display:flex;align-items:center;gap:8px;margin-top:22px;color:#ffe2dc;font-size:12px}
+.datetime-live span{width:8px;height:8px;border-radius:50%;background:#8cf0a7;box-shadow:0 0 0 4px #8cf0a726}
+.calculator{margin-bottom:22px}
+.saved-sales{margin-top:20px;padding:18px}
+.saved-sales .calculator-head{margin-bottom:8px}
+.saved-sales .calculator-head h2{margin:0}
+.records-date-label{display:flex;align-items:center;gap:8px;margin:0;font-size:12px}
+.records-date-label input{width:auto;margin:0;padding:7px 9px}
+.saved-sales .table-scroll{max-height:420px}
+.saved-sale-name{font-weight:700}
+.saved-sale-meta{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+.saved-sales .icon-btn{white-space:nowrap}
+.combo-calculator{margin:20px 0 4px;padding:16px;border:1px solid var(--line);border-radius:12px;background:#fffaf4}
+.combo-calculator .calculator-inputs{grid-template-columns:repeat(5,minmax(0,1fr))}
+.sale-mode-label{display:block;max-width:260px;margin:0 0 12px}
+.sale-mode-label select{margin-top:6px}
+.sale-review-components{margin:12px 0;border-top:1px solid var(--line)}
+.sale-review-component{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}
+.sale-review-total{display:flex;justify-content:space-between;align-items:center;padding:12px 0;font-size:16px}
+.sale-review-total strong{font-size:22px}
+.calculator-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.calculator-head h2{margin:0}
+.calculator-formula{color:var(--muted);font-size:13px}
+.calculator-inputs{display:grid;grid-template-columns:1.3fr repeat(5,1fr);gap:10px}
+.calculator-inputs label{margin-top:4px}
+.help-text{display:block;color:var(--muted);font-size:11px;font-weight:400;line-height:1.35;margin-top:5px}
+.calculator-inputs input,.calculator-inputs select{min-width:0}
+.product-picker{position:relative;display:flex;margin-top:6px}
+.product-picker input{min-width:0;margin:0;padding-right:44px}
+.product-picker-toggle{position:absolute;right:1px;top:1px;bottom:1px;width:40px;border:0;border-left:1px solid var(--line);border-radius:0 7px 7px 0;background:#f6eee7;color:#57534e;font-size:16px;cursor:pointer}
+.product-picker-options{position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:5;max-height:240px;overflow:auto;padding:4px;background:#fff;border:1px solid #d8d0c7;border-radius:8px;box-shadow:0 8px 24px #29252424}
+.product-picker-option{display:flex;justify-content:space-between;gap:10px;padding:9px 10px;border-radius:5px;color:#292524;font-size:13px;font-weight:400;cursor:pointer}
+.product-picker-option small{color:var(--muted)}
+.product-picker-option:hover,.product-picker-option.active{background:#f6eee7}
+.product-picker-empty{display:block;padding:10px;color:var(--muted);font-size:13px;font-weight:400}
+.calculator .note{margin:10px 0}
+.calculator-results{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}
+.calc-result{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px}
+.calc-result small{display:block;color:var(--muted)}
+.calc-result strong{display:block;font-size:21px;margin-top:5px}
+.calc-total{background:#fff5f2;border-color:#f0c9c2}
+.business-totals{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.business-total{display:flex;flex-direction:column;justify-content:center;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px}
+.business-total small{color:var(--muted)}
+.business-total strong{font-size:22px;margin-top:5px}
+.net-total{background:#f1fbf4;border-color:#cde9d4}
+.expense-input{margin:0;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.expense-input input{margin-top:5px}
+.expense-input .help-text{margin-top:3px}
+.calculator-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px}
+.calculator-footer .note{margin:0}
+.calculator-footer button:disabled{opacity:.55;cursor:not-allowed}
+.calculator select{width:100%;margin-top:6px;padding:11px 12px;border:1px solid #d8d0c7;border-radius:8px;background:#fff;font:inherit}
+.inventory-toolbar{display:flex;align-items:center;gap:12px;margin:0 0 12px}
+.inventory-toolbar label{margin:0}
+.inventory-toolbar input{max-width:360px;margin:0}
+.inventory-alerts{margin:0 0 12px;padding:12px 15px;border:1px solid #cde9d4;border-radius:10px;background:#f1fbf4;color:#17633a;font-size:13px;line-height:1.5}
+.inventory-alerts-attention{border-color:#f0c5be;background:#fff2ef;color:#9f2118}
+.stock-out td{background:#fff0ed}
+.stock-low td{background:#fff9e9}
+.stock-out td:first-child,.stock-low td:first-child{box-shadow:inset 4px 0 0 #b42318}
+.stock-low td:first-child{box-shadow:inset 4px 0 0 #d49820}
+.stock-out:hover td{background:#ffe7e2!important}
+.stock-low:hover td{background:#fff3d7!important}
+.card{background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 4px 18px #4b1b0b08}
+.table-card{padding:0;overflow:hidden}
+.table-scroll{overflow:auto}
+table{border-collapse:collapse;width:100%;min-width:900px}
+th,td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--line);font-size:14px}
+th{background:#f6eee7;color:#57534e;font-size:12px;text-transform:uppercase}
+.inventory-category th{padding:9px 14px;background:#817c76;color:#fff;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.inventory-category th span{float:right;color:#f4eee8;font-size:12px;font-weight:500;letter-spacing:0;text-transform:none}
+td:last-child{white-space:nowrap;min-width:105px}
+td strong{display:block}
+.subline{display:block;color:var(--muted);font-size:12px;margin-top:4px}
+.cup-options{display:grid;grid-template-columns:repeat(3,1fr);gap:0 12px}
+#productForm{max-height:min(90vh,760px);overflow:auto}
+#productCategory{width:100%;margin-top:6px;padding:11px 12px;border:1px solid #d8d0c7;border-radius:8px;background:#fff;font:inherit}
+tbody tr:last-child td{border-bottom:0}
+label{display:block;color:#57534e;font-size:13px;font-weight:700;margin-top:12px}
+input{width:100%;margin-top:6px;padding:11px 12px;border:1px solid #d8d0c7;border-radius:8px;background:#fff;font:inherit}
+.primary,.secondary,.ghost{border:0;border-radius:9px;padding:11px 16px;font-weight:700;cursor:pointer}
+.primary{background:var(--red);color:#fff}
+.primary:hover{background:var(--red-dark)}
+.secondary,.ghost{background:#f0e9e2;color:#57534e}
+.icon-btn{border:0;background:transparent;color:var(--red);cursor:pointer;font-size:16px;padding:5px}
+.danger{color:var(--red);font-weight:800}
+.ok{color:#16803c;font-weight:700}
+.note{color:var(--muted);font-size:13px;margin:12px 2px}
+.toast{position:fixed;right:20px;bottom:20px;background:#292524;color:#fff;padding:13px 18px;border-radius:9px;opacity:0;transform:translateY(10px);transition:.2s;pointer-events:none}
+.toast.show{opacity:1;transform:none}
+.hidden{display:none!important}
+dialog{border:0;border-radius:16px;padding:0;box-shadow:0 16px 50px #0004;width:min(440px,calc(100% - 30px))}
+dialog::backdrop{background:#29252488}
+#saleReviewDialog{width:min(560px,calc(100% - 30px));max-height:90vh;overflow:auto}
+#saleReviewForm{padding:24px}
+#saleReviewForm h2{margin-bottom:8px}
+#saleReviewForm .note{margin:8px 0}
+#productForm,#stockForm{padding:24px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:22px}
+#reportForm{padding:24px}
+#reportForm h2{margin-bottom:8px}
+#reportForm .note{margin:0}
+.report-actions{flex-wrap:wrap}
+#printReport{display:none}
+#salesReceiptDialog{width:min(420px,calc(100% - 24px));max-height:90vh;overflow:auto}
+.sales-receipt-content{padding:18px}
+.receipt-paper{width:min(100%,340px);margin:auto;padding:24px 22px;background:#fff;color:#292524;font:14px/1.45 "Courier New",monospace}
+.receipt-header{text-align:center}
+.receipt-logo{display:grid;width:42px;height:42px;place-items:center;margin:0 auto 8px;border-radius:12px;background:var(--red);color:#fff;font:800 15px Inter,Segoe UI,Arial,sans-serif}
+.receipt-header h2{margin:0;font:800 20px Inter,Segoe UI,Arial,sans-serif}
+.receipt-header p{margin:4px 0 0;font-size:12px;letter-spacing:.16em}
+.receipt-meta{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin-top:18px;font-size:12px}
+.receipt-meta strong{text-align:right}
+.receipt-divider{margin:14px 0;border-top:1px dashed #a8a29e}
+.receipt-items{display:grid;gap:7px}
+.receipt-item{display:grid;grid-template-columns:1fr auto;gap:3px 10px}
+.receipt-item span,.receipt-item small{grid-column:1/-1}
+.receipt-item span,.receipt-item small{color:#57534e}
+.receipt-item>strong:last-child{text-align:right}
+.receipt-total{display:flex;justify-content:space-between;gap:12px;padding-top:12px;border-top:1px dashed #a8a29e;font-size:18px;font-weight:800}
+.receipt-stock{margin-top:14px;color:#57534e;font-size:11px;text-align:center}
+.receipt-paper footer{margin-top:18px;text-align:center;font-size:12px}
+.receipt-actions{justify-content:center}
+#printReceipt{display:none}
+@media print{
+  @page{size:landscape;margin:8mm}
+  body.printing-report{min-height:0;background:#fff}
+  body.printing-report>*:not(#printReport){display:none!important}
+  body.printing-report>#printReport{display:block!important;position:absolute;inset:0;color:#111;font:10pt Arial,sans-serif}
+  #printReport .worksheet-header{display:flex;justify-content:flex-end;margin-bottom:4px;font-size:8pt}
+  #printReport .worksheet-header span{font-weight:700}
+  #printReport .inventory-worksheet{width:100%;min-width:0;border-collapse:collapse;table-layout:fixed}
+  #printReport .inventory-worksheet th,#printReport .inventory-worksheet td{padding:3px 4px;border:1px solid #111;font-size:7pt;text-align:left}
+  #printReport .inventory-worksheet thead th{background:#eee!important;color:#111;text-align:center}
+  #printReport .inventory-worksheet thead th:nth-child(1){width:21%}
+  #printReport .inventory-worksheet thead th:nth-child(2){width:6%}
+  #printReport .inventory-worksheet thead th:nth-child(3){width:7%}
+  #printReport .inventory-worksheet thead th:nth-child(4){width:9%}
+  #printReport .inventory-worksheet thead th:nth-child(5){width:8%}
+  #printReport .inventory-worksheet thead th:nth-child(6){width:9%}
+  #printReport .inventory-worksheet thead th:nth-child(7){width:8%}
+  #printReport .inventory-worksheet thead th:nth-child(8){width:8%}
+  #printReport .inventory-worksheet thead th:nth-child(9){width:9%}
+  #printReport .inventory-worksheet thead th:nth-child(10){width:15%}
+  #printReport .inventory-worksheet .worksheet-shaded td{background:#ddd!important}
+  #printReport .inventory-worksheet .worksheet-category th{background:#111!important;color:#fff!important;text-align:center;text-transform:uppercase}
+  #printReport .worksheet-notes{height:52px;border:1px solid #111;border-top:0;padding:6px}
+  #printReport .worksheet-notes>div{display:flex;align-items:center;gap:18px}
+  #printReport .worksheet-notes span{display:inline-block;width:80px;border-bottom:1px solid #777}
+  #printReport .worksheet-footer{display:grid;grid-template-columns:repeat(5,1fr)}
+  #printReport .worksheet-footer section{height:80px;border:1px solid #111;display:flex;flex-direction:column;align-items:center;padding:6px}
+  #printReport .worksheet-footer strong{font-size:10pt}
+  #printReport .worksheet-footer span{margin-top:auto;font-size:9pt}
+  #printReport tr{break-inside:avoid}
+  @page receipt{size:portrait;margin:4mm}
+  body.printing-receipt{min-height:0;background:#fff}
+  body.printing-receipt>*:not(#printReceipt){display:none!important}
+  body.printing-receipt>#printReceipt{display:block!important;position:absolute;inset:0 auto auto 0;width:72mm;page:receipt;color:#111;font:10pt "Courier New",monospace}
+  #printReceipt .receipt-paper{width:100%;max-width:none;margin:0;padding:0;color:#111;font:10pt/1.4 "Courier New",monospace}
+  #printReceipt .receipt-logo{background:#fff;color:#111;border:1px solid #111}
+  #printReceipt .receipt-header h2{font-size:16pt}
+  #printReceipt .receipt-item span,#printReceipt .receipt-item small,#printReceipt .receipt-stock{color:#111}
+  #printReceipt .receipt-total{font-size:13pt}
+  #printReceipt .receipt-paper footer{margin-top:14px}
+}
+@media(max-width:800px){.calculator-inputs,.combo-calculator .calculator-inputs{grid-template-columns:repeat(2,1fr)}.calculator-inputs label:first-child{grid-column:1/-1}.calculator-results{grid-template-columns:repeat(3,1fr)}.calculator-tools{grid-template-columns:1fr;max-width:440px}.datetime-card{min-height:230px}.business-totals{grid-template-columns:1fr 1fr}.net-total{grid-column:1/-1}}
+@media(max-width:560px){.shell{padding:22px 12px 35px}.topbar{padding:0 14px}.section-head{align-items:flex-start;flex-direction:column}h1{font-size:26px}.actions{width:100%}.actions button{flex:1}.inventory-toolbar{align-items:flex-start;flex-direction:column}.inventory-toolbar input{max-width:none}.form-grid,.cup-options{grid-template-columns:1fr}.calculator{padding:15px}.calculator-head{align-items:flex-start;flex-direction:column}.calculator-inputs{grid-template-columns:1fr 1fr;gap:8px}.calculator-results{grid-template-columns:repeat(2,1fr)}.business-totals{grid-template-columns:1fr}.net-total{grid-column:auto}.calculator-footer{align-items:stretch;flex-direction:column}.calculator-footer button{width:100%}.calculator-tools{gap:12px}.datetime-card{min-height:210px;padding:22px}}
+
+@media screen{
+  :root{
+    color:#292b30;
+    background:#f3f4f6;
+    --red:#a82018;
+    --red-dark:#841a14;
+    --cream:#fff;
+    --line:#e5e7eb;
+    --muted:#707782
+  }
+  body{background:#f3f4f6;color:#292b30;font-family:Inter,"Segoe UI",Arial,sans-serif}
+  .topbar{height:76px;background:#fff;border-bottom:1px solid #e8e9ec;box-shadow:0 2px 10px #20263108;padding:0 max(24px,calc((100% - 1320px)/2))}
+  .brand{gap:13px}
+  .logo{display:grid;place-items:center;width:43px;height:43px;padding:0;border-radius:13px;background:linear-gradient(145deg,#c43a2d,#941e17);box-shadow:0 5px 12px #a820182b}
+  .brand strong{font-size:16px;letter-spacing:-.02em}
+  .brand small{margin-top:3px;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  .shell{max-width:1360px;padding:38px 28px 60px}
+  .section-head{align-items:center;margin-bottom:25px}
+  .section-head h1{font-size:clamp(28px,3vw,36px);line-height:1.15;letter-spacing:-.045em;color:#20232a}
+  .section-head h1::after{display:block;width:42px;height:4px;margin-top:11px;border-radius:5px;background:var(--red);content:""}
+  .actions{gap:10px}
+  button{transition:background-color .16s ease,border-color .16s ease,box-shadow .16s ease,transform .16s ease}
+  button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #c44a3c55;outline-offset:2px}
+  .primary,.secondary,.ghost{min-height:42px;padding:11px 17px;border-radius:10px;font-size:13px;letter-spacing:.005em}
+  .primary{background:linear-gradient(135deg,#b52a20,#971e17);box-shadow:0 4px 10px #a8201824}
+  .primary:hover{background:linear-gradient(135deg,#a5231a,#7d1913);box-shadow:0 6px 14px #a8201835;transform:translateY(-1px)}
+  .secondary,.ghost{border:1px solid #e5e3e0;background:#fff;color:#494e57}
+  .secondary:hover,.ghost:hover{border-color:#d6c8c2;background:#fcf5f2}
+  .inventory-toolbar{display:grid;grid-template-columns:auto minmax(220px,410px);align-items:center;gap:14px;margin-bottom:14px;padding:15px 18px;border:1px solid #e7e8eb;border-radius:14px;background:#fff;box-shadow:0 3px 12px #20263106}
+  .inventory-toolbar label{color:#454a53;font-size:13px}
+  .inventory-toolbar input{width:100%;max-width:none}
+  input,.calculator select,#productCategory{min-height:42px;border:1px solid #dfe2e7;border-radius:9px;background:#fff;color:#252931;font-size:13px;transition:border-color .16s ease,box-shadow .16s ease}
+  input{padding:10px 12px}
+  input:focus,.calculator select:focus,#productCategory:focus{border-color:#bc766f;box-shadow:0 0 0 3px #a8201810;outline:0}
+  .card{border:1px solid #e5e7eb;border-radius:16px;background:#fff;box-shadow:0 5px 22px #20263108}
+  .table-card{box-shadow:0 5px 22px #20263109}
+  .table-scroll{scrollbar-color:#c9cdd3 #f4f5f6;scrollbar-width:thin}
+  table{min-width:980px}
+  th,td{padding:14px 15px;border-bottom:1px solid #eceef1;font-size:13px}
+  th{position:sticky;top:0;z-index:1;background:#f7f8fa;color:#66707c;font-size:10px;font-weight:750;letter-spacing:.08em}
+  tbody tr:not(.inventory-category):nth-child(even){background:#fcfcfd}
+  tbody tr:not(.inventory-category):hover{background:#fff8f6}
+  tbody tr.stock-out td{background:#fff0ed}
+  tbody tr.stock-low td{background:#fff9e9}
+  tbody tr.stock-out:hover td{background:#ffe7e2}
+  tbody tr.stock-low:hover td{background:#fff3d7}
+  .inventory-category th{position:static;padding:11px 15px;background:#343943;color:#fff;font-size:11px;letter-spacing:.1em}
+  .inventory-category th span{color:#d6d9df;font-size:11px}
+  td strong{font-weight:700;color:#292d35}
+  .subline{font-size:11px;color:#818894}
+  .icon-btn{margin:1px;padding:7px 8px;border-radius:7px;color:#9f261e;font-size:13px}
+  .icon-btn:hover{background:#fff0ed;color:#7f1a14}
+  .danger{color:#b42318!important}
+  .ok{color:#167445}
+  .note{color:#69717c;font-size:12px;line-height:1.55}
+  #inventory>.note{margin:12px 3px 20px}
+  .calculator{padding:24px 25px;margin-top:0;border-color:#e2e4e8;border-radius:18px;box-shadow:0 8px 26px #20263109}
+  .calculator-head{align-items:flex-end;margin-bottom:18px}
+  .eyebrow{margin-bottom:6px;color:#a3261d;font-size:10px;font-weight:800;letter-spacing:.13em}
+  h2{color:#272b33;font-size:19px;font-weight:750;letter-spacing:-.025em}
+  .calculator-formula{color:#78808a;font-size:11px;line-height:1.5}
+  .sale-mode-label{max-width:280px;margin:0 0 18px;color:#4c525c;font-size:12px}
+  .sale-mode-label select{height:44px;padding:0 12px}
+  .calculator-inputs{grid-template-columns:1.45fr repeat(5,minmax(105px,1fr));gap:13px}
+  .calculator-inputs label,label{color:#4e545e;font-size:11px;font-weight:700;letter-spacing:.005em}
+  .calculator-inputs label{line-height:1.4}
+  .calculator-inputs input,.calculator-inputs select{width:100%;margin-top:6px}
+  .help-text{font-size:10px;line-height:1.45;color:#858c96}
+  .calculator .note{margin:12px 2px}
+  .calculator-results{gap:10px;margin-top:18px}
+  .calc-result{min-height:91px;padding:15px 14px;border:1px solid #e7e9ed;border-radius:12px;background:#fafbfc}
+  .calc-result small{color:#737b86;font-size:10px;line-height:1.45}
+  .calc-result strong{margin-top:8px;color:#292d35;font-size:23px;letter-spacing:-.035em}
+  .calc-total{border-color:#eed4d0;background:#fff5f3}
+  .calc-total strong{color:#a5231a}
+  .business-totals{gap:12px;margin-top:19px;padding-top:18px;border-top:1px solid #eceef1}
+  .business-total,.expense-input{min-height:94px;padding:15px 16px;border:1px solid #e6e8ec;border-radius:12px;background:#fafbfc}
+  .business-total small{font-size:10px;color:#737b86}
+  .business-total strong{margin-top:8px;color:#272b33;font-size:24px;letter-spacing:-.03em}
+  .net-total{border-color:#cde7d7;background:#f2faf5}
+  .net-total strong{color:#187047}
+  .expense-input{font-size:11px}
+  .expense-input input{min-height:38px;margin-top:7px}
+  .expense-input .help-text{margin-top:4px}
+  .calculator-footer{justify-content:flex-start;margin-top:18px}
+  .calculator-footer button{min-width:190px}
+  .calculator-footer button:disabled{box-shadow:none;transform:none}
+  .calculator-tools{max-width:none;grid-template-columns:minmax(0,1.2fr) minmax(270px,.8fr);gap:16px;margin:24px 0 0}
+  .quick-calculator{padding:20px;border:1px solid #e4e6ea;border-radius:16px;box-shadow:0 4px 16px #20263107}
+  .quick-calculator .calculator-head{gap:6px;margin-bottom:16px}
+  .quick-calculator h2{font-size:17px}
+  .quick-calculator-display{min-height:64px;padding:13px 16px;border-color:#e2e5e9;border-radius:11px;background:#f9fafb;font-size:30px;font-variant-numeric:tabular-nums}
+  .quick-calculator-keys{gap:8px}
+  .quick-calculator-keys button{min-height:46px;border:1px solid #e7e8eb;border-radius:9px;background:#f7f8fa;color:#424751}
+  .quick-calculator-keys button:hover{border-color:#d7dbe1;background:#eef0f3}
+  .quick-calculator-keys button.primary{border-color:transparent;background:#a82018;color:white}
+  .datetime-card{min-height:100%;padding:28px;border:0;border-radius:16px;background:linear-gradient(145deg,#ad2b22 0%,#8f1d17 62%,#721812 100%);box-shadow:0 9px 22px #8f1d1726}
+  .datetime-card .eyebrow{color:#ffd5cb}
+  .datetime-icon{width:42px;height:42px;margin-bottom:25px;border-radius:12px}
+  .datetime-date{font-size:clamp(18px,2vw,23px);line-height:1.35}
+  .datetime-time{font-size:clamp(36px,4vw,52px)}
+  .saved-sales{margin-top:24px;padding:20px;border-radius:16px;box-shadow:0 5px 20px #20263108}
+  .saved-sales .calculator-head{align-items:center;gap:16px;margin-bottom:14px}
+  .saved-sales .calculator-head h2{font-size:17px;letter-spacing:.005em}
+  .saved-sales .table-scroll{max-height:430px;border:1px solid #e9ebef;border-radius:10px}
+  .saved-sales table{min-width:820px}
+  .saved-sales th{position:sticky;top:0}
+  .saved-sales td{padding:13px 14px}
+  .records-date-label{color:#6b727c;font-size:11px}
+  .records-date-label input{min-height:36px;border:1px solid #dfe2e7;border-radius:8px;font-size:12px}
+  .saved-sale-name{color:#30343c}
+  .saved-sale-meta{color:#838a94}
+  .saved-sales .icon-btn{padding:6px 8px;font-size:12px}
+  .combo-calculator{margin:18px 0 4px;padding:18px;border:1px solid #eadbd7;border-radius:14px;background:#fff9f7}
+  .combo-calculator .calculator-inputs{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .product-picker-options{border-color:#e2e4e8;border-radius:10px;box-shadow:0 12px 28px #2026311c}
+  .product-picker-option{padding:10px 11px;border-radius:7px}
+  .product-picker-option:hover,.product-picker-option.active{background:#fff4f1}
+  .toast{right:24px;bottom:24px;padding:14px 18px;border:1px solid #ffffff20;border-radius:11px;background:#252a32;box-shadow:0 10px 30px #20263130;font-size:13px}
+  dialog{border-radius:18px;box-shadow:0 24px 80px #15192335}
+  dialog::backdrop{background:#1b202988;backdrop-filter:blur(3px)}
+  #reportForm,#productForm,#stockForm,#saleReviewForm{padding:26px}
+  dialog h2{font-size:20px}
+  .dialog-actions{gap:10px}
+  .receipt-paper{border:1px solid #eceef1;border-radius:5px;box-shadow:0 4px 16px #2026310b}
+  @media(max-width:900px){
+    .shell{padding:30px 20px 48px}
+    .calculator-inputs,.combo-calculator .calculator-inputs{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .calculator-inputs label:first-child{grid-column:1/-1}
+    .calculator-results{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .calculator-tools{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:600px){
+    .topbar{height:66px;padding:0 16px}
+    .shell{padding:25px 14px 40px}
+    .section-head{gap:17px}
+    .section-head h1{font-size:28px}
+    .actions{gap:8px}
+    .actions button{flex:1;padding:10px 9px;font-size:11px}
+    .inventory-toolbar{grid-template-columns:1fr;gap:5px;padding:13px}
+    .calculator{padding:18px 15px}
+    .calculator-head{align-items:flex-start;flex-direction:column;gap:7px}
+    .calculator-inputs,.combo-calculator .calculator-inputs{grid-template-columns:1fr 1fr;gap:9px}
+    .calculator-inputs label:first-child{grid-column:1/-1}
+    .calculator-results{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+    .calc-result{min-height:82px;padding:12px}
+    .calc-result strong{font-size:21px}
+    .business-totals{grid-template-columns:1fr}
+    .net-total{grid-column:auto}
+    .calculator-footer button{width:100%}
+    .calculator-tools{grid-template-columns:1fr;gap:12px}
+    .datetime-card{min-height:250px}
+    .saved-sales{padding:14px}
+    .saved-sales .calculator-head{align-items:flex-start}
+    .records-date-label{align-items:flex-start;flex-direction:column}
+    .records-date-label input{width:100%}
+    .records-date-label{margin-left:auto}
+    .saved-sales-count{display:none}
+    .dialog-actions{flex-wrap:wrap}
+  }
+  body,button,input,select,textarea{font-size:17px}
+  body .primary,body .secondary,body .ghost,body .actions button{font-size:15px}
+  body label,body .inventory-toolbar label,body .calculator-inputs label{font-size:16px!important}
+  body input,body select,body option{font-size:16px!important}
+  body .note,body .inventory-alerts{font-size:15px!important}
+  body .sale-mode-label{font-size:16px!important}
+  body small,body .subline,body .help-text,body .saved-sale-meta,
+  body .calculator-formula,body .datetime-live,body .quick-calculator-status,
+  body .records-date-label,body .inventory-category th span,
+  body .eyebrow,body .receipt-header p,body .receipt-meta,
+  body .receipt-stock,body .receipt-paper footer{font-size:14px!important}
+  body th,body td{font-size:16px}
+  body .inventory-category th{font-size:15px}
+  body h2,body .quick-calculator h2{font-size:22px}
+  body .calc-result small,body .business-total small{font-size:14px}
+  body .calc-result strong,body .business-total strong{font-size:24px}
+  body .product-picker-option{font-size:15px}
+  body .product-picker-option small{font-size:14px}
+  body .icon-btn,body .toast{font-size:15px}
+  body .receipt-paper{font-size:16px}
+  body .records-date-label input{font-size:15px}
+}
